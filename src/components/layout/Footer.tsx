@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { CLINIC_INFO } from "@/data/clinicInfo";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Lock } from "lucide-react";
 import { ClinicLogo } from "./ClinicLogo";
 
 export const Footer: React.FC = () => {
@@ -85,8 +86,16 @@ export const Footer: React.FC = () => {
 
         {/* Legal & Medical Disclaimers */}
         <div className="pt-8 text-center sm:flex sm:justify-between text-[11px] text-[#A69B89] space-y-2 sm:space-y-0">
-          <p>
-            © {new Date().getFullYear()} {CLINIC_INFO.name}. All Rights Reserved.
+          <p className="flex items-center justify-center sm:justify-start gap-2 flex-wrap">
+            <span>© {new Date().getFullYear()} {CLINIC_INFO.name}. All Rights Reserved.</span>
+            <span className="opacity-40">·</span>
+            <Link
+              to="/admin"
+              className="text-[#A69B89] hover:text-[#D9B878] transition-colors inline-flex items-center gap-1"
+            >
+              <Lock className="w-3 h-3" />
+              <span>Admin Portal</span>
+            </Link>
           </p>
           <p className="max-w-xl text-left sm:text-right">
             Medical Disclaimer: Information on this site is for educational purposes and does not constitute a doctor-patient relationship until clinical consultation.
