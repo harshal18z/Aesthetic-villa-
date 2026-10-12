@@ -248,7 +248,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span>Call Clinic: {CLINIC_INFO.contact.phone}</span>
             </a>
             <p className="text-[11px] text-[#7A5E2E] mt-1">
-              Hours: 2 PM | 5 PM to 8 PM
+              Hours: Morning 10 AM – 2 PM | Evening 5 PM – 9 PM
             </p>
           </div>
         </div>

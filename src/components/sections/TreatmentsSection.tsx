@@ -42,10 +42,7 @@ export const TreatmentsSection: React.FC<TreatmentsSectionProps> = ({
   };
 
   const sectionRef = useRef<HTMLDivElement>(null);
-  const scrollY = useScrollParallax();
-
-  const sectionTop = sectionRef.current?.offsetTop || 0;
-  const relScroll = scrollY - sectionTop;
+  const relScroll = useScrollParallax(sectionRef);
 
   const categories = [
     "All",

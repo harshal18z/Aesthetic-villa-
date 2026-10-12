@@ -17,7 +17,7 @@ export const DOCTOR_INFO = {
   phoneRaw: "919226856934",
   email: "theaestheticvilla@gmail.com",
   clinic: "The Aesthetic Villa · Skin & Dental Clinic",
-  address: "SHOP NO. 4, PRATHMA CHS, Paramhans Nagar, Opposite Pebbles Urbania, Kothrud, Pune",
+  address: "Shop No. 4, Prathma Society, Ramkrishna Paramhans Nagar, Kothrud, Pune – 411038",
 };
 
 const LOCAL_BOOKINGS_KEY = "aesthetic_villa_bookings_v1";

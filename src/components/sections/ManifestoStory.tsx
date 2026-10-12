@@ -7,11 +7,7 @@ export const ManifestoStory: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const img0Ref = useRef<HTMLImageElement>(null);
   const img2Ref = useRef<HTMLImageElement>(null);
-  const scrollY = useScrollParallax();
-
-  // Calculate relative parallax offset for this section
-  const sectionTop = sectionRef.current?.offsetTop || 0;
-  const relScroll = scrollY - sectionTop;
+  const relScroll = useScrollParallax(sectionRef);
 
   return (
     <div

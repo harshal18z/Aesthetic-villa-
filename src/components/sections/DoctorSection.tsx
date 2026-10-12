@@ -1,16 +1,13 @@
 import React, { useRef } from "react";
 import { CLINIC_INFO } from "@/data/clinicInfo";
-import doctorImg from "@/assets/clinic/doctor-main.png";
+import doctorImg from "@/assets/clinic/doctor-pink-blazer.jpg";
 import { Award, CheckCircle, Shield, Heart, Sparkles } from "lucide-react";
 import { useScrollParallax } from "@/hooks/useScrollParallax";
 
 export const DoctorSection: React.FC = () => {
   const { doctor } = CLINIC_INFO;
   const sectionRef = useRef<HTMLDivElement>(null);
-  const scrollY = useScrollParallax();
-
-  const sectionTop = sectionRef.current?.offsetTop || 0;
-  const relScroll = scrollY - sectionTop;
+  const relScroll = useScrollParallax(sectionRef);
 
   const badgeIcons = [Award, CheckCircle, Shield, Heart];
 
@@ -50,18 +47,18 @@ export const DoctorSection: React.FC = () => {
               <img
                 src={doctorImg}
                 alt={`${doctor.name} - Chief Dental Surgeon`}
-                className="w-full h-full object-cover object-top transition-transform duration-1000 ease-out will-change-transform group-hover:scale-105"
+                className="w-full h-full object-cover object-top origin-top transition-transform duration-1000 ease-out will-change-transform group-hover:scale-105"
                 style={{
-                  transform: `translateY(${Math.max(-35, Math.min(35, relScroll * 0.07))}px) scale(1.08)`,
+                  transform: `translateY(${Math.max(-30, Math.min(30, relScroll * 0.06))}px)`,
                 }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#2B2118]/85 via-transparent to-transparent opacity-85" />
               <div className="absolute bottom-6 left-6 right-6 text-white">
-                <span className="font-serif text-2xl font-medium block">
+                <span className="font-serif text-2xl sm:text-3xl font-medium block">
                   {doctor.name}
                 </span>
-                <span className="text-xs text-[#D9B878] tracking-widest uppercase font-semibold">
-                  {doctor.title} · {doctor.qualification}
+                <span className="text-xs text-[#D9B878] tracking-widest uppercase font-semibold block mt-1">
+                  Chief Dental Surgeon · Aesthetic & Restorative Specialist
                 </span>
               </div>
             </div>
@@ -119,7 +116,7 @@ export const DoctorSection: React.FC = () => {
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-[#2B2118]/85 font-medium">
                 <li className="flex items-center gap-2">
                   <CheckCircle className="w-3.5 h-3.5 text-[#B8955A] shrink-0" />
-                  <span>B.D.S. Dental Surgeon (MUHS)</span>
+                  <span>Experienced Dental Surgeon (MUHS Registered)</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <CheckCircle className="w-3.5 h-3.5 text-[#B8955A] shrink-0" />

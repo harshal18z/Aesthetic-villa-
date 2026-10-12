@@ -30,7 +30,7 @@ export const ALL_FAQS: FAQItem[] = [
     id: "c2",
     category: "About Clinic & Appointments",
     q: "Where can I find the best dental clinic in Kothrud?",
-    a: "The Aesthetic Villa is conveniently located in the heart of Kothrud at Shop No. 4, Prathma Co-Op Housing Society, Paramhans Nagar, Opposite Pebbles Urbania, Pune 411038. It is easily accessible from Paud Road, Chandani Chowk, and Bavdhan with dedicated patient parking."
+    a: "The Aesthetic Villa is conveniently located in Kothrud at Shop No. 4, Prathma Society, Ramkrishna Paramhans Nagar, Kothrud, Pune – 411038. It is easily accessible from Paud Road, Chandani Chowk, and Bavdhan with dedicated patient parking."
   },
   {
     id: "c3",
@@ -54,7 +54,7 @@ export const ALL_FAQS: FAQItem[] = [
     id: "c6",
     category: "About Clinic & Appointments",
     q: "What are your clinic timings and working days?",
-    a: "We are open Monday through Saturday: 2:00 PM – 4:00 PM (Afternoon) and 5:00 PM – 8:00 PM (Evening). Sunday visits are arranged on an appointment basis for working professionals and emergency care."
+    a: "We are open Monday through Saturday: Morning 10:00 AM – 2:00 PM and Evening 5:00 PM – 9:00 PM. Sunday visits are arranged on an appointment basis for working professionals and emergency care."
   },
   {
     id: "c7",
@@ -66,7 +66,7 @@ export const ALL_FAQS: FAQItem[] = [
     id: "c8",
     category: "About Clinic & Appointments",
     q: "Is parking available near the clinic?",
-    a: "Yes, ample two-wheeler and four-wheeler visitor parking is available directly in front of and adjacent to Prathma Housing Society, Opposite Pebbles Urbania in Paramhans Nagar."
+    a: "Yes, ample two-wheeler and four-wheeler visitor parking is available directly in front of and adjacent to Prathma Society in Ramkrishna Paramhans Nagar, Kothrud."
   },
   {
     id: "c9",
@@ -130,7 +130,7 @@ export const ALL_FAQS: FAQItem[] = [
     id: "gh3",
     category: "General Oral Health",
     q: "How often should I see the dentist?",
-    a: "Every 6 months for a routine preventive check-up and ultrasonic cleaning. Regular visits detect microscopic decay and hairline fractures long before they cause pain, saving you time, tooth structure, and treatment expenses."
+    a: "Every 6 months for a routine preventive check-up and ultrasonic cleaning. Regular visits detect early decay and hairline fractures long before they cause pain, saving you time, tooth structure, and treatment expenses."
   },
   {
     id: "gh4",
@@ -160,7 +160,7 @@ export const ALL_FAQS: FAQItem[] = [
     id: "gh8",
     category: "General Oral Health",
     q: "Why are my teeth sensitive to hot and cold?",
-    a: "Dentin hypersensitivity occurs when the protective outer enamel thins (from aggressive brushing, teeth grinding, or acidic food) or when gums recede, exposing microscopic dentinal tubules. We treat this using desensitizing varnishes, bonding, or addressing underlying decay."
+    a: "Dentin hypersensitivity occurs when the protective outer enamel thins (from aggressive brushing, teeth grinding, or acidic food) or when gums recede, exposing the underlying dentinal tubules. We treat this using desensitizing varnishes, bonding, or addressing underlying decay."
   },
   {
     id: "gh9",

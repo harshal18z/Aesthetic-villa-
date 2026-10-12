@@ -21,7 +21,7 @@ export const ReviewsSection: React.FC = () => {
   });
 
   const sectionRef = useRef<HTMLDivElement>(null);
-  const scrollY = useScrollParallax();
+  const relScroll = useScrollParallax(sectionRef);
 
   useEffect(() => {
     let isMounted = true;
@@ -34,9 +34,6 @@ export const ReviewsSection: React.FC = () => {
       isMounted = false;
     };
   }, []);
-
-  const sectionTop = sectionRef.current?.offsetTop || 0;
-  const relScroll = scrollY - sectionTop;
 
   const reviewsToDisplay =
     activeTab === "Google"

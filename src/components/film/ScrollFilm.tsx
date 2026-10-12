@@ -3,17 +3,22 @@ import { CLINIC_INFO } from "@/data/clinicInfo";
 import { TiltedGridHero, TiltedGridImage } from "@/components/ui/tilted-grid-hero";
 
 const TILTED_GRID_IMAGES: TiltedGridImage[] = [
-  { src: "/img/0.webp", alt: "The Aesthetic Villa Reception and Boucle Lounge" },
-  { src: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1200&q=80", alt: "Architectural tranquility and modern dental suite" },
-  { src: "/img/2.webp", alt: "Travertine reception desk overlooking garden" },
-  { src: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=1200&q=80", alt: "Aesthetic dentistry smile rehabilitation" },
-  { src: "/img/3.webp", alt: "Private consultation and unhurried clinical suite" },
-  { src: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1200&q=80", alt: "Precision ceramic craftsmanship and dental instruments" },
-  { src: "/img/9.webp", alt: "Sunlit courtyard and tranquil greenery view" },
-  { src: "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=1200&q=80", alt: "Warm tranquil consultation lounge" },
-  { src: "/img/10.webp", alt: "State-of-the-art sterile dental operatory" },
-  { src: "/img/17.webp", alt: "The Aesthetic Villa architectural entrance" },
+  { src: "/img/dr-tejashree-portrait.jpg", alt: "Dr. Tejashree Kulkarni - Chief Dental Surgeon" },
+  { src: "/img/dr-treating-patient-2.jpg", alt: "Dr. Tejashree Kulkarni treating patient with gentle precision in dental chair" },
+  { src: "/img/clinic-1.jpg", alt: "The Aesthetic Villa reception and patient lounge" },
+  { src: "/img/dr-surgical-scrubs.jpg", alt: "Dr. Tejashree Kulkarni preparing precision dental instruments" },
+  { src: "/img/rotary-endodontics-2.jpg", alt: "Rotary endodontics motor handpiece close-up — precision root canal instrument" },
+  { src: "/img/dr-treating-patient.jpg", alt: "Dr. Tejashree Kulkarni treating patient with gentle precision" },
+  { src: "/img/rotary-endodontics-handpiece.jpg", alt: "Advanced rotary endodontics precision instrumentation" },
+  { src: "/img/clinic-2.jpg", alt: "The Aesthetic Villa clinic interior and dental operatory" },
+  { src: "/img/unhurried-patient-consultation.jpg", alt: "Dr. Tejashree explaining dental model during unhurried consultation" },
+  { src: "/img/clinic-3.jpg", alt: "Sterilization and clinical preparation area" },
+  { src: "/img/clear-aligners-orthodontics.jpg", alt: "Custom aesthetic clear aligners at The Aesthetic Villa" },
+  { src: "/img/clinic-4.jpg", alt: "Dental operatory suite with modern equipment" },
+  { src: "/img/doctor-6.jpg", alt: "Dr. Tejashree Kulkarni in clinical attire" },
+  { src: "/img/clinic-5.jpg", alt: "The Aesthetic Villa — calm, modern dental environment" },
 ];
+
 
 // Helper utilities
 const clamp = (x: number, a = 0, b = 1) => Math.min(b, Math.max(a, x));
@@ -127,7 +132,10 @@ class FrameSequence {
     c.fillStyle = "#F6F2EC";
     c.fillRect(0, 0, W, H);
 
-    const s = Math.min(W / im.naturalWidth, H / im.naturalHeight);
+    const isPortrait = W < H;
+    const s = (this.key === "A" && isPortrait)
+      ? Math.max(W / im.naturalWidth, H / im.naturalHeight)
+      : Math.min(W / im.naturalWidth, H / im.naturalHeight) * (this.key === "C" && isPortrait ? 1.3 : 1);
     const w = im.naturalWidth * s;
     const h = im.naturalHeight * s;
     c.drawImage(im, (W - w) / 2, (H - h) / 2, w, h);
@@ -221,10 +229,11 @@ export const ScrollFilm: React.FC<ScrollFilmProps> = ({ onShowNavbar }) => {
     el.style.visibility = v > 0.005 ? "visible" : "hidden";
   };
 
-  const T = (el: HTMLElement | null, v: number, dy = 24) => {
+  const T = (el: HTMLElement | null, v: number, dy = 24, isMiddleY = false) => {
     if (!el) return;
     setVis(el, v);
-    el.style.transform = `translateY(${(1 - v) * dy}px)`;
+    const y = (1 - v) * dy;
+    el.style.transform = isMiddleY ? `translateY(calc(-50% + ${y}px))` : `translateY(${y}px)`;
   };
 
   const BL = (el: HTMLElement | null, v: number) => {
@@ -432,7 +441,7 @@ export const ScrollFilm: React.FC<ScrollFilmProps> = ({ onShowNavbar }) => {
     if (bloomfullRef.current) {
       bloomfullRef.current.style.transform = `translate(-50%,-50%) scale(${ease(seg(p, 0.968, 0.995)).toFixed(3)})`;
     }
-    T(t11Ref.current, seg(p, 0.978, 0.995));
+    T(t11Ref.current, seg(p, 0.978, 0.995), 24, true);
     if (t11Ref.current) {
       t11Ref.current.style.pointerEvents = cl > 0.9 ? "auto" : "none";
     }
@@ -579,7 +588,7 @@ export const ScrollFilm: React.FC<ScrollFilmProps> = ({ onShowNavbar }) => {
             ref={lARef}
             className="absolute inset-0 flex items-center justify-center pointer-events-none"
           >
-            <div className="relative w-full max-w-[177.78vh] aspect-video">
+            <div className="relative w-full h-full sm:max-w-[177.78vh] sm:aspect-video flex items-center justify-center">
               <canvas
                 ref={cvARef}
                 className="w-full h-full object-cover"
@@ -592,12 +601,12 @@ export const ScrollFilm: React.FC<ScrollFilmProps> = ({ onShowNavbar }) => {
           {/* Chapter 1 Text Overlays */}
           <div
             ref={t1Ref}
-            className="absolute bottom-12 sm:bottom-20 left-6 sm:left-16 z-30 max-w-xl opacity-0 pointer-events-none bg-gradient-to-r from-[#F6F2EC]/95 via-[#F6F2EC]/70 to-transparent p-6 rounded"
+            className="absolute bottom-16 sm:bottom-20 left-4 right-4 sm:left-16 sm:right-auto z-30 max-w-xl opacity-0 pointer-events-none bg-[#F6F2EC]/92 sm:bg-gradient-to-r sm:from-[#F6F2EC]/95 sm:via-[#F6F2EC]/70 sm:to-transparent p-5 sm:p-6 rounded-2xl sm:rounded border sm:border-0 border-[#B8955A]/25 backdrop-blur-md"
           >
             <p className="text-xs tracking-[0.25em] uppercase text-[#7A5E2E] font-semibold mb-2">
               The Aesthetic Villa · Pune
             </p>
-            <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-[#2B2118] font-normal leading-[1.05]">
+            <h1 className="font-serif text-2xl sm:text-5xl lg:text-6xl text-[#2B2118] font-normal leading-[1.1]">
               Healthcare that feels like home.
             </h1>
           </div>
@@ -609,14 +618,14 @@ export const ScrollFilm: React.FC<ScrollFilmProps> = ({ onShowNavbar }) => {
           >
             <TiltedGridHero
               images={TILTED_GRID_IMAGES}
-              className="w-full h-full max-w-[177.78vh] aspect-video"
+              className="w-full h-full sm:max-w-[177.78vh] sm:aspect-video"
               speed={4}
               tileHeight={27}
               curve={78}
               gap={7}
             >
               <div className="relative z-10 flex h-full flex-col items-center justify-between py-10 sm:py-16 text-center pointer-events-auto">
-                <div className="px-6">
+                <div className="px-4 sm:px-6">
                   <p className="text-xs tracking-[0.25em] uppercase text-[#7A5E2E] font-semibold mb-2 drop-shadow-xs">
                     The Aesthetic Villa · Kothrud
                   </p>
@@ -626,7 +635,7 @@ export const ScrollFilm: React.FC<ScrollFilmProps> = ({ onShowNavbar }) => {
                     brought into focus.
                   </h2>
                 </div>
-                <p className="max-w-md text-xs sm:text-sm text-[#4a3c2d] px-6 leading-relaxed bg-[#F6F2EC]/85 backdrop-blur-xs py-2 rounded-full border border-[#B8955A]/25">
+                <p className="max-w-md text-xs sm:text-sm text-[#4a3c2d] px-4 sm:px-6 leading-relaxed bg-[#F6F2EC]/85 backdrop-blur-xs py-2 rounded-full border border-[#B8955A]/25 mx-4 sm:mx-0">
                   Images curve in from one edge, flatten out at the centre, then fade away round the other.
                 </p>
               </div>
@@ -638,31 +647,31 @@ export const ScrollFilm: React.FC<ScrollFilmProps> = ({ onShowNavbar }) => {
             ref={lHeroRef}
             className="absolute inset-0 flex items-center justify-center opacity-0 pointer-events-none"
           >
-            <div className="relative w-full max-w-[177.78vh] aspect-video flex items-center justify-center">
+            <div className="relative w-full h-[65vh] sm:h-full sm:max-w-[177.78vh] sm:aspect-video flex items-center justify-center">
               <div
                 ref={rimRef}
-                className="absolute w-[45%] h-[85%] rounded-full bg-radial from-[#B8955A]/30 via-[#E8DCC6]/20 to-transparent blur-2xl animate-pulse"
+                className="absolute w-[60%] sm:w-[45%] h-[70%] sm:h-[85%] rounded-full bg-radial from-[#B8955A]/30 via-[#E8DCC6]/20 to-transparent blur-2xl animate-pulse"
               />
               <img
                 ref={heroImgRef}
                 src="/img/hero.webp"
                 alt="Floating titanium dental implant with ceramic crown"
-                className="w-full h-full object-contain relative z-10"
+                className="w-full h-full object-contain relative z-10 p-4 sm:p-0"
               />
             </div>
           </div>
 
           <div
             ref={t2Ref}
-            className="absolute top-1/2 -translate-y-1/2 left-6 sm:left-16 z-30 max-w-lg opacity-0 pointer-events-none"
+            className="absolute top-12 sm:top-1/2 sm:-translate-y-1/2 left-4 sm:left-16 right-4 sm:right-auto text-center sm:text-left z-30 max-w-lg opacity-0 pointer-events-none bg-[#F6F2EC]/90 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none p-4 sm:p-0 rounded-2xl sm:rounded-none border sm:border-0 border-[#B8955A]/25"
           >
             <p className="text-xs tracking-[0.25em] uppercase text-[#7A5E2E] font-semibold mb-2">
               The Implant
             </p>
-            <h2 className="font-serif text-3xl sm:text-5xl text-[#2B2118] font-normal leading-tight mb-3">
+            <h2 className="font-serif text-2xl sm:text-5xl text-[#2B2118] font-normal leading-tight mb-2 sm:mb-3">
               Precision Crafted for Life
             </h2>
-            <p className="text-sm text-[#4a3c2d] leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#4a3c2d] leading-relaxed">
               Engineered with medical-grade biocompatible titanium, designed to integrate seamlessly into your natural jawbone.
             </p>
           </div>
@@ -672,7 +681,7 @@ export const ScrollFilm: React.FC<ScrollFilmProps> = ({ onShowNavbar }) => {
             ref={lAsmRef}
             className="absolute inset-0 flex items-center justify-center opacity-0 pointer-events-none"
           >
-            <div className="relative w-full max-w-[177.78vh] aspect-video">
+            <div className="relative w-full max-w-[420px] sm:max-w-[177.78vh] aspect-square sm:aspect-video flex items-center justify-center">
               <img
                 src="/img/plate.webp"
                 alt="Background plate"
@@ -689,7 +698,7 @@ export const ScrollFilm: React.FC<ScrollFilmProps> = ({ onShowNavbar }) => {
                 className="absolute left-[31.25%] top-[62.31%] w-[37.5%] h-[33.06%] will-change-transform"
               >
                 <img src="/img/part_fixture.webp" alt="Titanium fixture" className="w-full h-full object-fill" />
-                <span className="absolute left-[66%] top-[42%] text-[10px] sm:text-xs tracking-widest uppercase text-[#7A5E2E] font-medium whitespace-nowrap">
+                <span className="absolute left-[66%] top-[42%] text-[9px] sm:text-xs tracking-widest uppercase text-[#7A5E2E] font-medium whitespace-nowrap bg-white/70 sm:bg-transparent px-1 sm:px-0 rounded">
                   Fixture Body
                 </span>
               </div>
@@ -699,7 +708,7 @@ export const ScrollFilm: React.FC<ScrollFilmProps> = ({ onShowNavbar }) => {
                 className="absolute left-[31.25%] top-[48.15%] w-[37.5%] h-[14.17%] will-change-transform"
               >
                 <img src="/img/part_screw.webp" alt="Abutment screw" className="w-full h-full object-fill" />
-                <span className="absolute left-[66%] top-[42%] text-[10px] sm:text-xs tracking-widest uppercase text-[#7A5E2E] font-medium whitespace-nowrap">
+                <span className="absolute left-[66%] top-[42%] text-[9px] sm:text-xs tracking-widest uppercase text-[#7A5E2E] font-medium whitespace-nowrap bg-white/70 sm:bg-transparent px-1 sm:px-0 rounded">
                   Locking Screw
                 </span>
               </div>
@@ -709,7 +718,7 @@ export const ScrollFilm: React.FC<ScrollFilmProps> = ({ onShowNavbar }) => {
                 className="absolute left-[31.25%] top-[26.57%] w-[37.5%] h-[21.57%] will-change-transform"
               >
                 <img src="/img/part_abut.webp" alt="Abutment" className="w-full h-full object-fill" />
-                <span className="absolute left-[66%] top-[42%] text-[10px] sm:text-xs tracking-widest uppercase text-[#7A5E2E] font-medium whitespace-nowrap">
+                <span className="absolute left-[66%] top-[42%] text-[9px] sm:text-xs tracking-widest uppercase text-[#7A5E2E] font-medium whitespace-nowrap bg-white/70 sm:bg-transparent px-1 sm:px-0 rounded">
                   Precision Abutment
                 </span>
               </div>
@@ -719,7 +728,7 @@ export const ScrollFilm: React.FC<ScrollFilmProps> = ({ onShowNavbar }) => {
                 className="absolute left-[31.25%] top-[2.78%] w-[37.5%] h-[23.8%] will-change-transform"
               >
                 <img src="/img/part_crown.webp" alt="Ceramic crown" className="w-full h-full object-fill" />
-                <span className="absolute left-[66%] top-[42%] text-[10px] sm:text-xs tracking-widest uppercase text-[#7A5E2E] font-medium whitespace-nowrap">
+                <span className="absolute left-[66%] top-[42%] text-[9px] sm:text-xs tracking-widest uppercase text-[#7A5E2E] font-medium whitespace-nowrap bg-white/70 sm:bg-transparent px-1 sm:px-0 rounded">
                   Zirconia Crown
                 </span>
               </div>
@@ -728,23 +737,23 @@ export const ScrollFilm: React.FC<ScrollFilmProps> = ({ onShowNavbar }) => {
 
           <div
             ref={t3aRef}
-            className="absolute top-1/2 -translate-y-1/2 left-6 sm:left-16 z-30 max-w-lg opacity-0 pointer-events-none"
+            className="absolute top-12 sm:top-1/2 sm:-translate-y-1/2 left-4 sm:left-16 right-4 sm:right-auto text-center sm:text-left z-30 max-w-lg opacity-0 pointer-events-none bg-[#F6F2EC]/90 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none p-4 sm:p-0 rounded-2xl sm:rounded-none border sm:border-0 border-[#B8955A]/25"
           >
             <p className="text-xs tracking-[0.25em] uppercase text-[#7A5E2E] font-semibold mb-1">
               Precision
             </p>
-            <h2 className="font-serif text-3xl sm:text-5xl text-[#2B2118]">Part by part.</h2>
+            <h2 className="font-serif text-2xl sm:text-5xl text-[#2B2118]">Part by part.</h2>
           </div>
 
           <div
             ref={t3bRef}
-            className="absolute top-1/2 -translate-y-1/2 left-6 sm:left-16 z-30 max-w-lg opacity-0 pointer-events-none"
+            className="absolute top-12 sm:top-1/2 sm:-translate-y-1/2 left-4 sm:left-16 right-4 sm:right-auto text-center sm:text-left z-30 max-w-lg opacity-0 pointer-events-none bg-[#F6F2EC]/90 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none p-4 sm:p-0 rounded-2xl sm:rounded-none border sm:border-0 border-[#B8955A]/25"
           >
             <p className="text-xs tracking-[0.25em] uppercase text-[#7A5E2E] font-semibold mb-1">
               Micron Tolerance
             </p>
-            <h2 className="font-serif text-3xl sm:text-5xl text-[#2B2118] mb-3">Made to fit forever.</h2>
-            <p className="text-sm text-[#4a3c2d]">
+            <h2 className="font-serif text-2xl sm:text-5xl text-[#2B2118] mb-2 sm:mb-3">Made to fit forever.</h2>
+            <p className="text-xs sm:text-sm text-[#4a3c2d]">
               Every component is calibrated for optimal biological seal, preventing bacterial micro-leakage and bone loss.
             </p>
           </div>
@@ -754,7 +763,7 @@ export const ScrollFilm: React.FC<ScrollFilmProps> = ({ onShowNavbar }) => {
             ref={lRotRef}
             className="absolute inset-0 flex items-center justify-center opacity-0 pointer-events-none"
           >
-            <div className="relative w-full max-w-[177.78vh] aspect-video">
+            <div className="relative w-full max-w-[420px] sm:max-w-[177.78vh] aspect-square sm:aspect-video flex items-center justify-center">
               <canvas
                 ref={cvCRef}
                 className="w-full h-full object-contain"
@@ -765,72 +774,72 @@ export const ScrollFilm: React.FC<ScrollFilmProps> = ({ onShowNavbar }) => {
               {/* Interactive 3D Callouts */}
               <div
                 ref={callout1Ref}
-                className="absolute left-[60%] top-[24%] flex items-center gap-2 text-xs tracking-wider uppercase text-[#2B2118] font-semibold opacity-0"
+                className="absolute left-[54%] sm:left-[60%] top-[20%] sm:top-[24%] flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs tracking-wider uppercase text-[#2B2118] font-semibold opacity-0"
               >
-                <span className="w-8 h-[1px] bg-[#B8955A]" />
-                <span className="bg-white/85 px-2.5 py-1 rounded backdrop-blur shadow-sm border border-[#B8955A]/30">
+                <span className="w-5 sm:w-8 h-[1px] bg-[#B8955A]" />
+                <span className="bg-white/90 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded backdrop-blur shadow-sm border border-[#B8955A]/30 whitespace-nowrap">
                   Translucent Crown
                 </span>
               </div>
 
               <div
                 ref={callout2Ref}
-                className="absolute left-[58%] top-[40%] flex items-center gap-2 text-xs tracking-wider uppercase text-[#2B2118] font-semibold opacity-0"
+                className="absolute left-[52%] sm:left-[58%] top-[38%] sm:top-[40%] flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs tracking-wider uppercase text-[#2B2118] font-semibold opacity-0"
               >
-                <span className="w-8 h-[1px] bg-[#B8955A]" />
-                <span className="bg-white/85 px-2.5 py-1 rounded backdrop-blur shadow-sm border border-[#B8955A]/30">
+                <span className="w-5 sm:w-8 h-[1px] bg-[#B8955A]" />
+                <span className="bg-white/90 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded backdrop-blur shadow-sm border border-[#B8955A]/30 whitespace-nowrap">
                   Custom Titanium Abutment
                 </span>
               </div>
 
               <div
                 ref={callout3Ref}
-                className="absolute left-[60%] top-[62%] flex items-center gap-2 text-xs tracking-wider uppercase text-[#2B2118] font-semibold opacity-0"
+                className="absolute left-[54%] sm:left-[60%] top-[60%] sm:top-[62%] flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs tracking-wider uppercase text-[#2B2118] font-semibold opacity-0"
               >
-                <span className="w-8 h-[1px] bg-[#B8955A]" />
-                <span className="bg-white/85 px-2.5 py-1 rounded backdrop-blur shadow-sm border border-[#B8955A]/30">
+                <span className="w-5 sm:w-8 h-[1px] bg-[#B8955A]" />
+                <span className="bg-white/90 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded backdrop-blur shadow-sm border border-[#B8955A]/30 whitespace-nowrap">
                   Pure Grade-IV Titanium
                 </span>
               </div>
 
               <div
                 ref={callout4Ref}
-                className="absolute right-[53%] top-[74%] flex items-center gap-2 text-xs tracking-wider uppercase text-[#2B2118] font-semibold opacity-0"
+                className="absolute right-[54%] sm:right-[53%] top-[72%] sm:top-[74%] flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs tracking-wider uppercase text-[#2B2118] font-semibold opacity-0"
               >
-                <span className="bg-white/85 px-2.5 py-1 rounded backdrop-blur shadow-sm border border-[#B8955A]/30">
+                <span className="bg-white/90 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded backdrop-blur shadow-sm border border-[#B8955A]/30 whitespace-nowrap">
                   Self-Tapping Threads
                 </span>
-                <span className="w-8 h-[1px] bg-[#B8955A]" />
+                <span className="w-5 sm:w-8 h-[1px] bg-[#B8955A]" />
               </div>
             </div>
           </div>
 
           <div
             ref={t4aRef}
-            className="absolute top-1/2 -translate-y-1/2 left-6 sm:left-16 z-30 max-w-lg opacity-0 pointer-events-none"
+            className="absolute top-12 sm:top-1/2 sm:-translate-y-1/2 left-4 sm:left-16 right-4 sm:right-auto text-center sm:text-left z-30 max-w-lg opacity-0 pointer-events-none bg-[#F6F2EC]/90 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none p-4 sm:p-0 rounded-2xl sm:rounded-none border sm:border-0 border-[#B8955A]/25"
           >
             <p className="text-xs tracking-[0.25em] uppercase text-[#7A5E2E] font-semibold mb-1">
               360° Inspection
             </p>
-            <h2 className="font-serif text-3xl sm:text-5xl text-[#2B2118]">Every angle scrutinized.</h2>
+            <h2 className="font-serif text-2xl sm:text-5xl text-[#2B2118]">Every angle scrutinized.</h2>
           </div>
 
           <div
             ref={t4bRef}
-            className="absolute top-1/2 -translate-y-1/2 left-6 sm:left-16 z-30 max-w-lg opacity-0 pointer-events-none"
+            className="absolute top-12 sm:top-1/2 sm:-translate-y-1/2 left-4 sm:left-16 right-4 sm:right-auto text-center sm:text-left z-30 max-w-lg opacity-0 pointer-events-none bg-[#F6F2EC]/90 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none p-4 sm:p-0 rounded-2xl sm:rounded-none border sm:border-0 border-[#B8955A]/25"
           >
             <p className="text-xs tracking-[0.25em] uppercase text-[#7A5E2E] font-semibold mb-1">
               Geometric Harmony
             </p>
-            <h2 className="font-serif text-3xl sm:text-5xl text-[#2B2118]">Built for longterm stability.</h2>
+            <h2 className="font-serif text-2xl sm:text-5xl text-[#2B2118]">Built for longterm stability.</h2>
           </div>
 
-          {/* 5. PATIENT JOURNEY (Directly after 360° Rotation) */}
+          {/* 5. PATIENT JOURNEY */}
           <div
             ref={lJRef}
             className="absolute inset-0 flex items-center justify-center opacity-0 pointer-events-none"
           >
-            <div className="relative w-full max-w-[177.78vh] aspect-video">
+            <div className="relative w-full max-w-[480px] sm:max-w-[177.78vh] aspect-[4/5] sm:aspect-video flex items-center justify-center">
               {[0, 1, 2, 3, 4, 5].map((i) => {
                 const imgs = ["9", "10", "11", "3", "17", "14"];
                 return (
@@ -852,12 +861,12 @@ export const ScrollFilm: React.FC<ScrollFilmProps> = ({ onShowNavbar }) => {
               })}
 
               {/* Journey overlay timeline card */}
-              <div className="absolute bottom-8 left-1/2 -translate-x-1/2 bg-[#F6F2EC]/92 backdrop-blur-md border border-[#B8955A]/40 px-6 py-4 rounded-xl shadow-lg w-[90%] max-w-lg text-center">
-                <div className="flex items-center justify-between mb-3 text-xs font-semibold text-[#7A5E2E] tracking-wider uppercase">
+              <div className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 bg-[#F6F2EC]/95 backdrop-blur-md border border-[#B8955A]/40 px-3 sm:px-6 py-3 sm:py-4 rounded-xl shadow-lg w-[95%] sm:w-[90%] max-w-lg text-center pointer-events-auto">
+                <div className="flex items-center justify-between mb-2 sm:mb-3 text-[10px] sm:text-xs font-semibold text-[#7A5E2E] tracking-wider uppercase">
                   <span>Step-by-Step Care</span>
                   <span>Unhurried & Transparent</span>
                 </div>
-                <div className="relative w-full h-1 bg-black/10 rounded-full mb-3 overflow-hidden">
+                <div className="relative w-full h-1 bg-black/10 rounded-full mb-2 sm:mb-3 overflow-hidden">
                   <svg className="w-full h-full" preserveAspectRatio="none">
                     <path
                       ref={jpathRef}
@@ -870,7 +879,7 @@ export const ScrollFilm: React.FC<ScrollFilmProps> = ({ onShowNavbar }) => {
                     />
                   </svg>
                 </div>
-                <div className="flex justify-between text-[11px] font-medium text-[#4a3c2d]">
+                <div className="grid grid-cols-5 gap-1 text-[9px] sm:text-[11px] font-medium text-[#4a3c2d]">
                   {["01 Consult", "02 3D Scan", "03 Placement", "04 Healing", "05 Final Smile"].map(
                     (step, idx) => (
                       <span
@@ -878,7 +887,8 @@ export const ScrollFilm: React.FC<ScrollFilmProps> = ({ onShowNavbar }) => {
                         ref={(el) => {
                           if (el) jDotsRef.current[idx] = el;
                         }}
-                        className="px-2 py-0.5 rounded transition-colors"
+                        className="px-1 sm:px-2 py-0.5 rounded transition-colors text-center truncate"
+                        title={step}
                       >
                         {step}
                       </span>
@@ -894,7 +904,7 @@ export const ScrollFilm: React.FC<ScrollFilmProps> = ({ onShowNavbar }) => {
             ref={lPlanRef}
             className="absolute inset-0 flex items-center justify-center opacity-0 pointer-events-none"
           >
-            <div className="relative w-full max-w-[177.78vh] aspect-video flex items-center justify-center">
+            <div className="relative w-full max-w-[480px] sm:max-w-[177.78vh] aspect-square sm:aspect-video flex items-center justify-center">
               {/* Dynamic 3D Moving Container */}
               <div
                 ref={jawContainerRef}
@@ -953,13 +963,13 @@ export const ScrollFilm: React.FC<ScrollFilmProps> = ({ onShowNavbar }) => {
                 {/* Floating HUD Callouts */}
                 <div
                   ref={pl1Ref}
-                  className="absolute left-[14%] top-[72%] text-xs font-semibold text-[#D9B878] tracking-widest uppercase bg-black/75 px-3 py-1.5 rounded-lg border border-[#D9B878]/40 shadow-lg"
+                  className="absolute left-[4%] sm:left-[14%] top-[76%] sm:top-[72%] text-[9px] sm:text-xs font-semibold text-[#D9B878] tracking-wider uppercase bg-black/85 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg border border-[#D9B878]/40 shadow-lg whitespace-nowrap"
                 >
                   Guided Surgical Stent Planning
                 </div>
                 <div
                   ref={pl2Ref}
-                  className="absolute left-[70%] top-[16%] text-xs font-semibold text-[#D9B878] tracking-widest uppercase bg-black/75 px-3 py-1.5 rounded-lg border border-[#D9B878]/40 shadow-lg"
+                  className="absolute right-[4%] sm:right-auto sm:left-[70%] top-[14%] sm:top-[16%] text-[9px] sm:text-xs font-semibold text-[#D9B878] tracking-wider uppercase bg-black/85 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg border border-[#D9B878]/40 shadow-lg whitespace-nowrap"
                 >
                   Volumetric Bone Density Assessment
                 </div>
@@ -969,13 +979,13 @@ export const ScrollFilm: React.FC<ScrollFilmProps> = ({ onShowNavbar }) => {
 
           <div
             ref={t7Ref}
-            className="absolute top-16 left-6 sm:left-16 z-30 max-w-lg opacity-0 pointer-events-none text-[#F3E9D6]"
+            className="absolute top-10 sm:top-16 left-4 sm:left-16 right-4 sm:right-auto text-center sm:text-left z-30 max-w-lg opacity-0 pointer-events-none text-[#F3E9D6] bg-black/60 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none p-4 sm:p-0 rounded-2xl sm:rounded-none border sm:border-0 border-[#D9B878]/30"
           >
-            <p className="text-xs tracking-[0.25em] uppercase text-[#D9B878] font-semibold mb-2">
+            <p className="text-xs tracking-[0.25em] uppercase text-[#D9B878] font-semibold mb-1 sm:mb-2">
               Computer-Guided Surgery
             </p>
-            <h2 className="font-serif text-3xl sm:text-5xl mb-3">See it before it happens.</h2>
-            <p className="text-sm text-[#D8CDBA] leading-relaxed">
+            <h2 className="font-serif text-2xl sm:text-5xl mb-2 sm:mb-3">See it before it happens.</h2>
+            <p className="text-xs sm:text-sm text-[#D8CDBA] leading-relaxed">
               Sub-millimeter accuracy using CBCT digital diagnostics eliminates guesswork and ensures rapid, painless recovery.
             </p>
           </div>
@@ -985,7 +995,7 @@ export const ScrollFilm: React.FC<ScrollFilmProps> = ({ onShowNavbar }) => {
             ref={lArchRef}
             className="absolute inset-0 flex items-center justify-center opacity-0 pointer-events-none"
           >
-            <div className="relative w-full max-w-[177.78vh] aspect-video">
+            <div className="relative w-full max-w-[480px] sm:max-w-[177.78vh] aspect-[4/3] sm:aspect-video flex items-center justify-center">
               <img src="/img/14.webp" alt="Natural smile arc" className="w-full h-full object-contain" />
               <svg
                 className="absolute inset-0 w-full h-full"
@@ -1012,13 +1022,13 @@ export const ScrollFilm: React.FC<ScrollFilmProps> = ({ onShowNavbar }) => {
 
           <div
             ref={t8Ref}
-            className="absolute bottom-16 left-1/2 -translate-x-1/2 text-center z-30 max-w-lg opacity-0 pointer-events-none bg-[#F6F2EC]/85 px-6 py-4 rounded-xl border border-[#B8955A]/30 backdrop-blur-sm"
+            className="absolute bottom-6 sm:bottom-16 left-0 right-0 mx-auto w-[92%] sm:w-auto max-w-lg text-center z-30 opacity-0 pointer-events-none bg-[#F6F2EC]/92 px-4 sm:px-6 py-3 sm:py-4 rounded-xl border border-[#B8955A]/30 backdrop-blur-sm"
           >
             <p className="text-xs tracking-[0.25em] uppercase text-[#7A5E2E] font-semibold mb-1">
               Aesthetic Architecture
             </p>
-            <h2 className="font-serif text-3xl sm:text-5xl text-[#2B2118]">Drawn, not stamped.</h2>
-            <p className="text-sm text-[#4a3c2d] mt-2">
+            <h2 className="font-serif text-2xl sm:text-5xl text-[#2B2118]">Drawn, not stamped.</h2>
+            <p className="text-xs sm:text-sm text-[#4a3c2d] mt-1 sm:mt-2">
               Every curve honors your natural facial symmetry, speech dynamics, and lip support.
             </p>
           </div>
@@ -1028,28 +1038,28 @@ export const ScrollFilm: React.FC<ScrollFilmProps> = ({ onShowNavbar }) => {
             ref={lSealRef}
             className="absolute inset-0 flex items-center justify-center opacity-0 pointer-events-none"
           >
-            <div className="relative w-full max-w-[177.78vh] aspect-video flex items-center justify-center">
+            <div className="relative w-full max-w-[480px] sm:max-w-[177.78vh] aspect-square sm:aspect-video flex items-center justify-center">
               <div
                 ref={ringRef}
-                className="absolute w-64 h-64 rounded-full border border-[#B8955A] opacity-0"
+                className="absolute w-48 sm:w-64 h-48 sm:h-64 rounded-full border border-[#B8955A] opacity-0"
               />
               <img
                 ref={sealRef}
                 src="/img/clinic-logo-dark.png"
                 alt="The Aesthetic Villa Official Mark"
-                className="w-56 sm:w-80 h-auto object-contain relative z-10 drop-shadow-md"
+                className="w-44 sm:w-80 h-auto object-contain relative z-10 drop-shadow-md"
               />
             </div>
           </div>
 
           <div
             ref={t9Ref}
-            className="absolute bottom-14 left-1/2 -translate-x-1/2 text-center z-30 max-w-lg opacity-0 pointer-events-none"
+            className="absolute bottom-6 sm:bottom-14 left-0 right-0 mx-auto w-[92%] sm:w-auto max-w-lg text-center z-30 opacity-0 pointer-events-none bg-[#F6F2EC]/90 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none p-4 sm:p-0 rounded-2xl sm:rounded-none border sm:border-0 border-[#B8955A]/25"
           >
             <p className="text-xs tracking-[0.25em] uppercase text-[#7A5E2E] font-semibold mb-1">
               Our Clinical Mark
             </p>
-            <p className="text-sm text-[#4a3c2d] mt-1">Pune's Premier Dental & Skin Retreat</p>
+            <p className="text-xs sm:text-sm text-[#4a3c2d] mt-1">Pune's Premier Dental & Skin Retreat</p>
           </div>
 
           {/* 9. RETREAT / CALM */}
@@ -1057,7 +1067,7 @@ export const ScrollFilm: React.FC<ScrollFilmProps> = ({ onShowNavbar }) => {
             ref={lWellRef}
             className="absolute inset-0 flex items-center justify-center opacity-0 pointer-events-none"
           >
-            <div className="relative w-full max-w-[177.78vh] aspect-video">
+            <div className="relative w-full max-w-[480px] sm:max-w-[177.78vh] aspect-[4/3] sm:aspect-video flex items-center justify-center">
               <img
                 src="/img/17.webp"
                 alt="Armchair with tea by sunny garden window"
@@ -1072,12 +1082,12 @@ export const ScrollFilm: React.FC<ScrollFilmProps> = ({ onShowNavbar }) => {
 
           <div
             ref={t10Ref}
-            className="absolute bottom-16 left-6 sm:left-16 z-30 max-w-lg opacity-0 pointer-events-none bg-[#F6F2EC]/85 p-6 rounded-xl border border-[#B8955A]/30 backdrop-blur"
+            className="absolute bottom-12 sm:bottom-16 left-4 sm:left-16 right-4 sm:right-auto text-center sm:text-left z-30 max-w-lg opacity-0 pointer-events-none bg-[#F6F2EC]/85 p-5 sm:p-6 rounded-2xl sm:rounded-xl border border-[#B8955A]/30 backdrop-blur"
           >
             <p className="text-xs tracking-[0.25em] uppercase text-[#7A5E2E] font-semibold mb-1">
               Private Villa Retreat
             </p>
-            <h2 className="font-serif text-3xl sm:text-5xl text-[#2B2118]">Less clinic. More calm.</h2>
+            <h2 className="font-serif text-2xl sm:text-5xl text-[#2B2118]">Less clinic. More calm.</h2>
           </div>
 
           {/* 10. CLOSE & TRANSITION CTA ("Your visit, unhurried.") */}
@@ -1093,17 +1103,17 @@ export const ScrollFilm: React.FC<ScrollFilmProps> = ({ onShowNavbar }) => {
 
           <div
             ref={t11Ref}
-            className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 text-center z-30 max-w-xl opacity-0"
+            className="absolute top-1/2 left-0 right-0 mx-auto w-[92%] max-w-xl text-center z-30 opacity-0 px-4"
           >
             <p className="text-xs tracking-[0.25em] uppercase text-[#7A5E2E] font-semibold mb-2">
               Begin Your Journey
             </p>
-            <h2 className="font-serif text-4xl sm:text-6xl text-[#2B2118] font-normal mb-6">
+            <h2 className="font-serif text-3xl sm:text-6xl text-[#2B2118] font-normal mb-6">
               Your visit, unhurried.
             </h2>
             <a
               href="#book"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#2B2118] hover:bg-[#7A5E2E] text-white text-base font-medium tracking-wide shadow-xl transition-all duration-300 hover:scale-105"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#2B2118] hover:bg-[#7A5E2E] text-white text-sm sm:text-base font-medium tracking-wide shadow-xl transition-all duration-300 hover:scale-105"
             >
               Book a Consultation
             </a>

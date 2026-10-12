@@ -392,14 +392,14 @@ export const BookingSection: React.FC<BookingSectionProps> = ({
                       className="w-full px-4 py-3 rounded-xl border border-[#B8955A]/35 bg-[#F6F2EC]/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#B8955A]/50 text-sm text-[#2B2118]"
                     >
                       <option value="">Any Convenient Time</option>
-                      <optgroup label="Afternoon Slots (2:00 PM – 4:00 PM)">
+                      <optgroup label="Morning Slots (10:00 AM – 2:00 PM)">
                         {morningSlots.map((s) => (
                           <option key={s} value={s}>
                             {s}
                           </option>
                         ))}
                       </optgroup>
-                      <optgroup label="Evening Slots (5:00 PM – 8:00 PM)">
+                      <optgroup label="Evening Slots (5:00 PM – 9:00 PM)">
                         {eveningSlots.map((s) => (
                           <option key={s} value={s}>
                             {s}

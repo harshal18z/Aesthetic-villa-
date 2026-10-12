@@ -38,7 +38,7 @@ const CLINICAL_TOPICS: ClinicalGuideTopic[] = [
     title: "Advanced Rotary Root Canal Treatment (RCT)",
     subtitle: "Painless, single-sitting tooth preservation using computerized rotary endodontics and bio-ceramic sealers.",
     leadParagraph:
-      "When deep tooth decay, trauma, or cracks penetrate into the inner vascular pulp, severe pain and infection arise. At The Aesthetic Villa in Kothrud, we practice microscopic, rotary endodontics designed to save your natural tooth seamlessly without the discomfort traditionally associated with older dental techniques.",
+      "When deep tooth decay, trauma, or cracks penetrate into the inner vascular pulp, severe pain and infection arise. At The Aesthetic Villa in Kothrud, we practice precision-guided, rotary endodontics designed to save your natural tooth seamlessly without the discomfort traditionally associated with older dental techniques.",
     detailedPoints: [
       {
         heading: "1. Digital Radiovisiography (RVG) & Apex Localization",

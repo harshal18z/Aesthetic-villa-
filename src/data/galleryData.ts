@@ -78,7 +78,12 @@ export const GALLERY_ITEMS: GalleryMediaItem[] = [
   { id: "c9", title: "Evening Villa Ambience", type: "image", url: clinic9, category: "Clinic", description: "Warm ambient illumination designed to soothe dental anxiety." },
 
   // Doctor & Consultations
-  { id: "d-main", title: "Dr. Tejashree Kulkarni", type: "image", url: doctorMain, category: "Doctor", description: "Chief Dental Surgeon & Specialist in Aesthetic & Restorative Care." },
+  { id: "d-pink", title: "Dr. Tejashree Kulkarni", type: "image", url: "/img/dr-tejashree-pink-blazer.jpg", category: "Doctor", description: "Chief Dental Surgeon & Founder of The Aesthetic Villa." },
+  { id: "d-portrait", title: "Dr. Tejashree Kulkarni (Clinical)", type: "image", url: "/img/dr-tejashree-portrait.jpg", category: "Doctor", description: "Chief Dental Surgeon in clinical attire." },
+  { id: "d-surgical", title: "Precision Clinical Examination", type: "image", url: "/img/dr-surgical-scrubs.jpg", category: "Doctor", description: "Dr. Tejashree preparing sterile instruments for gentle patient examination." },
+  { id: "d-real-1", title: "Dr. Tejashree in Operatory", type: "image", url: "/img/dr-treating-patient.jpg", category: "Doctor", description: "Dr. Tejashree Kulkarni delivering gentle, precision dental care." },
+  { id: "d-real-3", title: "Chairside Treatment Session", type: "image", url: "/img/dr-treating-patient-2.jpg", category: "Doctor", description: "Dr. Tejashree performing a careful dental examination with full protective gear." },
+  { id: "d-real-2", title: "Unhurried Patient Education", type: "image", url: "/img/unhurried-patient-consultation.jpg", category: "Doctor", description: "Explaining tooth anatomy and treatment stages with clarity and warmth." },
   { id: "d1", title: "One-on-One Smile Consultation", type: "image", url: doctor1, category: "Doctor", description: "Dedicated time to understand your personal goals and clinical needs." },
   { id: "d2", title: "Digital Bite & Esthetic Analysis", type: "image", url: doctor2, category: "Doctor", description: "Careful review of dental harmony and treatment pathways." },
   { id: "d3", title: "Aesthetic Case Planning", type: "image", url: doctor3, category: "Doctor", description: "Custom shade matching and ceramic translucency planning." },
@@ -87,12 +92,15 @@ export const GALLERY_ITEMS: GalleryMediaItem[] = [
   { id: "d7", title: "Collaborative Team Care", type: "image", url: doctor7, category: "Doctor", description: "Assisted by trained, empathetic clinical staff." },
 
   // Equipment & Technology
+  { id: "e-real-1", title: "Rotary Endodontics Handpiece", type: "image", url: "/img/rotary-endodontics-handpiece.jpg", category: "Equipment", description: "Computerized rotary endodontic motor for painless root canal therapy." },
+  { id: "e-real-2", title: "NiTi Rotary File Close-Up", type: "image", url: "/img/rotary-endodontics-2.jpg", category: "Equipment", description: "Nickel-titanium rotary file mounted on the Woodpecker endodontic motor — precision at 0.02mm." },
   { id: "e1", title: "Microsurgical Dental Instruments", type: "image", url: instruments1, category: "Equipment", description: "High-grade surgical stainless steel for atraumatic micro-procedures." },
   { id: "e2", title: "Class-B Autoclave Sterilization", type: "image", url: instruments2, category: "Equipment", description: "Zero-compromise sterile packaging for every patient." },
   { id: "e3", title: "Digital Apex & Rotary Endodontics", type: "image", url: instruments3, category: "Equipment", description: "Micro-electronic apex measurement ensuring 100% accurate root canal cleaning." },
   { id: "e4", title: "Ultrasonic Piezo Tech", type: "image", url: instruments4, category: "Equipment", description: "Painless scaling and bone preservation technology." },
 
   // Treatments & Clinical Results
+  { id: "t-real-1", title: "Custom Clear Aligners", type: "image", url: "/img/clear-aligners-orthodontics.jpg", category: "Treatment", description: "Bespoke transparent aligners for discreet, comfortable smile alignment." },
   { id: "t1", title: "In-Office Whitening Result", type: "image", url: treatment1, category: "Treatment", description: "Instant 6-shade brighten with gentle remineralizing polish." },
   { id: "t2", title: "Porcelain Veneer Smile Design", type: "image", url: treatment2, category: "Treatment", description: "Natural contouring with seamless tooth-colored ceramic." },
   { id: "t3", title: "Clear Aligner Alignment", type: "image", url: treatment3, category: "Treatment", description: "Progressive invisible alignment correcting crowding gently." },
